@@ -3,7 +3,7 @@
 
     <groupId>gov.va.isaac.db</groupId>
     <artifactId>isaac-db-parent</artifactId>
-    <version>1.0-Sprint_09-SNAPSHOT</version>
+    <version>1.0-Sprint_10-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>ISAAC DB Project Assembly Parent</name>
