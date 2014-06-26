@@ -7,7 +7,7 @@
 		<version>1.0-Sprint_09-SNAPSHOT</version>
 	</parent>
 	<packaging>pom</packaging>
-	<artifactId>solar-all</artifactId>
+	<artifactId>solor-all</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>org.ihtsdo.sct.baseline</groupId>
@@ -95,6 +95,16 @@
 							<bdbFolderLocation>${project.build.directory}/berkeley-db</bdbFolderLocation>
 						</configuration>
 					</execution>
+<!-- 					<execution> -->
+<!-- 						<id>create-isaac-path</id> -->
+<!-- 						<phase>generate-sources</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>create-isaac-path-bdb</goal> -->
+<!-- 						</goals> -->
+<!-- 						<configuration> -->
+<!-- 							<bdbFolderLocation>${project.build.directory}/berkeley-db</bdbFolderLocation> -->
+<!-- 						</configuration> -->
+<!-- 					</execution> -->
 				</executions>
 			</plugin>
            <plugin>

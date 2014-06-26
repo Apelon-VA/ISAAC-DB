@@ -62,8 +62,8 @@
         </plugins>
     </build> 
 
-    <modules>
-        <module>snomed-active-only</module>
-        <module>solar-all</module>
-    </modules>
+<!--     <modules> -->
+<!--         <module>snomed-active-only</module> -->
+<!--         <module>solar-all</module> -->
+<!--     </modules> -->
     </project>
