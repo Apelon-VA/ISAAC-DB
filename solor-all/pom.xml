@@ -147,6 +147,9 @@
             <goals>
               <goal>shutdown-terminology-store</goal>
             </goals>
+            <configuration>
+              <bdbFolderLocation>${project.build.directory}/berkeley-db</bdbFolderLocation>
+            </configuration>
           </execution>
 
         </executions>
