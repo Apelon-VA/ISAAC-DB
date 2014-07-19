@@ -1,0 +1,166 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- Parent project -->
+	<parent>
+		<groupId>gov.va.isaac.db</groupId>
+		<artifactId>isaac-db-parent</artifactId>
+		<version>1.0-Sprint_10-SNAPSHOT</version>
+	</parent>
+
+	<!-- Project metadata -->
+	<packaging>pom</packaging>
+	<groupId>gov.va.isaac.db.modules</groupId>
+	<artifactId>snomed-active-only</artifactId>
+
+	<!-- Dependencies -->
+	<dependencies>
+		<dependency>
+			<groupId>org.ihtsdo.sct.baseline</groupId>
+			<artifactId>sct-econcept</artifactId>
+			<version>2014.01.31-build-7</version>
+			<classifier>active-only</classifier>
+			<type>zip</type>
+		</dependency>
+	</dependencies>
+
+	<!-- Unpack data artifact, load econcepts file, repack database -->
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<id>unpack-econcept</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<configuration>
+							<includeGroupIds>org.ihtsdo.sct.baseline</includeGroupIds>
+							<includeArtifactIds>sct-econcept</includeArtifactIds>
+							<outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>gov.va.isaac.modules</groupId>
+				<artifactId>mojos</artifactId>
+				<version>${isaac.version}</version>
+				<executions>
+					<execution>
+						<id>setup</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>setup-terminology-store</goal>
+						</goals>
+						<configuration>
+							<bdbFolderLocation>${project.build.directory}/berkeley-db</bdbFolderLocation>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>load-econcept</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>load-index-bdb</goal>
+						</goals>
+						<configuration>
+							<setupAndShutdown>false</setupAndShutdown>
+							<econFileStrings>
+								<econFileString>${project.build.directory}/generated-resources/eConcepts.jbin</econFileString>
+							</econFileStrings>
+							<bdbFolderLocation>${project.build.directory}/berkeley-db</bdbFolderLocation>
+						</configuration>
+					</execution>
+
+					<!-- Creates the ISAAC develompent path - f5c0a264-15af-5b94-a964-bb912ea5634f -->
+					<execution>
+						<id>create-isaac-path</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>create-path</goal>
+						</goals>
+						<configuration>
+							<pathFsn>ISAAC development path</pathFsn>
+							<pathPrefTerm>ISAAC development path</pathPrefTerm>
+							<originPathUuids>
+								<!-- SNOMED Core -->
+								<uuid>8c230474-9f11-30ce-9cad-185a96fd03a2</uuid>
+							</originPathUuids>
+							<!-- The parent of ISAAC Path, the "release" concept, also parent of SNOMED Core -->
+							<parentPathUuid>88f89cc0-1d94-34a4-85ed-aa1949079314</parentPathUuid>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>shutdown</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>shutdown-terminology-store</goal>
+						</goals>
+						<configuration>
+							<bdbFolderLocation>${project.build.directory}/berkeley-db</bdbFolderLocation>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+
+		<!-- Assemble econcepts file into data artifact -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>truezip-maven-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<id>copy-db-into-zip</id>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<fileset>
+								<directory>${project.build.directory}/berkeley-db</directory>
+								<includes>
+									<include>*</include>
+								</includes>
+								<outputDirectory>${project.build.directory}/${project.build.finalName}.zip</outputDirectory>
+							</fileset>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Atttach zip file as an artifact -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.9</version>
+				<executions>
+					<execution>
+						<id>attach-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>${project.build.directory}/${project.build.finalName}.zip</file>
+									<type>zip</type>
+								</artifact>
+							</artifacts>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>
