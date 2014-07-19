@@ -10,6 +10,7 @@
 
 	<!-- Project metadata -->
 	<packaging>pom</packaging>
+	<groupId>gov.va.isaac.db.modules</groupId>
 	<artifactId>snomed-active-only</artifactId>
 
 	<!-- Dependencies -->

@@ -11,6 +11,7 @@
 
 	<!-- Project metadata -->
 	<packaging>pom</packaging>
+	<groupId>gov.va.isaac.db.modules</groupId>
 	<artifactId>solor-all</artifactId>
 
 	<!-- Dependencies to data -->
