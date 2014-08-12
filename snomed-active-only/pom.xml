@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>gov.va.isaac.db</groupId>
 		<artifactId>isaac-db-parent</artifactId>
-		<version>1.0-Sprint_11-SNAPSHOT</version>
+		<version>1.0-Sprint_12-SNAPSHOT</version>
 	</parent>
 
 	<!-- Project metadata -->
@@ -21,6 +21,25 @@
 			<version>2014.01.31-build-7</version>
 			<classifier>active-only</classifier>
 			<type>zip</type>
+			<!-- Sigh... SCT is defined in a particularly silly way... need to exclude all of these, to not waste everyones time fetching them -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.ihtsdo.sct.rf2</groupId>
+					<artifactId>sct-rf2-arf-econcept-full</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.ihtsdo.sct</groupId>
+					<artifactId>mrcm-refset-specs</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.ihtsdo</groupId>
+					<artifactId>tk-spelling-variants</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.ihtsdo</groupId>
+					<artifactId>tk-case-sensitive-words</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 
