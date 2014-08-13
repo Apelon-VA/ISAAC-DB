@@ -44,13 +44,8 @@
 		<repository>
 			<id>maestro-deploy</id>
 			<name>VA Public Releases Repository</name>
-			<url>http://va-archiva-host:8082/archiva/repository/va-releases/</url>
+			<url>http://va-archiva-host:8082/archiva/repository/data-files/</url>
 		</repository>
-		<snapshotRepository>
-			<id>maestro-deploy</id>
-			<name>VA Public Snapshots Repository</name>
-			<url>http://va-archiva-host:8082/archiva/repository/va-snapshots/</url>
-		</snapshotRepository>
 	</distributionManagement>
 
 	<!-- Standard build setup -->

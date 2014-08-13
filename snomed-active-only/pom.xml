@@ -10,8 +10,9 @@
 
 	<!-- Project metadata -->
 	<packaging>pom</packaging>
-	<groupId>gov.va.isaac.db.modules</groupId>
-	<artifactId>snomed-active-only</artifactId>
+	<artifactId>solor-snomed</artifactId>
+	<version>2014.08.13</version>
+	<description>A SOLOR database, including sct-econcept-2014.01.31-build-7-active-only</description>
 
 	<!-- Dependencies -->
 	<dependencies>
@@ -21,6 +22,8 @@
 			<version>2014.01.31-build-7</version>
 			<classifier>active-only</classifier>
 			<type>zip</type>
+			<scope>compile</scope>
+			<optional>true</optional>  <!-- Not needed at runtime -->
 			<!-- Sigh... SCT is defined in a particularly silly way... need to exclude all of these, to not waste everyones time fetching them -->
 			<exclusions>
 				<exclusion>
@@ -131,48 +134,43 @@
 				</executions>
 			</plugin>
 
-		<!-- Assemble econcepts file into data artifact -->
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>truezip-maven-plugin</artifactId>
-				<version>1.2</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
 				<executions>
 					<execution>
-						<id>copy-db-into-zip</id>
-						<goals>
-							<goal>copy</goal>
-						</goals>
+						<id>zip</id>
 						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
 						<configuration>
-							<fileset>
-								<directory>${project.build.directory}/berkeley-db</directory>
-								<includes>
-									<include>*</include>
-								</includes>
-								<outputDirectory>${project.build.directory}/${project.build.finalName}.zip</outputDirectory>
-							</fileset>
+							<descriptors>
+								<descriptor>${basedir}/src/assembly/assembly.xml</descriptor>
+							</descriptors>
+							<attach>false</attach>
+							<encoding>UTF-8</encoding>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-
-			<!-- Atttach zip file as an artifact -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.9</version>
+				<version>1.8</version>
 				<executions>
 					<execution>
-						<id>attach-artifacts</id>
-						<phase>package</phase>
+						<id>attach-artifact</id>
 						<goals>
 							<goal>attach-artifact</goal>
 						</goals>
 						<configuration>
 							<artifacts>
 								<artifact>
-									<file>${project.build.directory}/${project.build.finalName}.zip</file>
-									<type>zip</type>
+									<type>bdb.zip</type>
+									<file>${project.build.directory}/${project.build.finalName}-active-only.bdb.zip</file>
+									<classifier>active-only</classifier>
 								</artifact>
 							</artifacts>
 						</configuration>
