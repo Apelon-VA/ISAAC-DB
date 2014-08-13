@@ -46,10 +46,9 @@
 		</dependency>
 	</dependencies>
 
-	<!-- Unpack data artifact, load econcepts file, repack database -->
+	<!-- Unpack data projects, load econcepts files, create ISAAC path, repack database -->
 	<build>
 		<plugins>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
