@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>gov.va.isaac.db</groupId>
 		<artifactId>isaac-db-parent</artifactId>
-		<version>1.0-Sprint_10-SNAPSHOT</version>
+		<version>1.0-Sprint_11-SNAPSHOT</version>
 	</parent>
 
 	<!-- Project metadata -->
@@ -97,6 +97,51 @@
 							<parentPathUuid>88f89cc0-1d94-34a4-85ed-aa1949079314</parentPathUuid>
 						</configuration>
 					</execution>
+
+					<!-- Creates the Solor root -->
+					<execution>
+						<id>create-solor-root</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>create-root-concept</goal>
+						</goals>
+						<configuration>
+							<rootFsn>Solor</rootFsn>
+							<rootPrefTerm>Solor</rootPrefTerm>
+							<childUuids>
+								<!-- Terminology Auxiliary concept -->
+								<uuid>f4d2fabc-7e96-3b3a-a348-ae867ba74029</uuid>
+								<!-- Refset Auxiliary Concept -->
+								<uuid>1c698388-c309-3dfa-96f0-86248753fac5</uuid>
+								<!-- SNOMED CT Concept -->
+								<uuid>ee9ac5d2-a07c-3981-a57a-f7f26baf38d8</uuid>
+							</childUuids>
+						</configuration>
+					</execution>
+
+					<!-- Creates the Information model metadata -->
+					<execution>
+						<id>create-information-models</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>create-root-concept</goal>
+						</goals>
+						<configuration>
+							<rootFsn>Information Models</rootFsn>
+							<rootPrefTerm>Information Models</rootPrefTerm>
+							<childFsns>
+								<fsn>Clinical Element Model</fsn>
+								<fsn>Federal Health Information Model</fsn>
+								<fsn>Health eDecision</fsn>
+							</childFsns>
+							<childPrefTerms>
+								<prefTerm>Clinical Element Model</prefTerm>
+								<prefTerm>Federal Health Information Model</prefTerm>
+								<prefTerm>Health eDecision</prefTerm>
+							</childPrefTerms>
+						</configuration>
+					</execution>
+
 
 					<execution>
 						<id>shutdown</id>
