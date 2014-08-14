@@ -4,7 +4,7 @@
 	<!-- Project metadata -->
 	<groupId>gov.va.isaac.db</groupId>
 	<artifactId>isaac-db-parent</artifactId>
-	<version>1.0-Sprint_11-SNAPSHOT</version>
+	<version>1.0-Sprint_12-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>ISAAC DB Project Assembly Parent</name>
 	<url>https://csfe.aceworkspace.net/sf/projects/veterans_administration_project/</url>
@@ -14,7 +14,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<isaac.version>1.0-Sprint_11-SNAPSHOT</isaac.version>
+		<isaac.version>1.0-Sprint_12-SNAPSHOT</isaac.version>
 	</properties>
 
 	<!-- License info -->
@@ -39,19 +39,14 @@
 	</scm>
 
 	<!-- Maven repository -->
-	<distributionManagement>
 	<!-- I don't normally define these here, but the -D overrides are being problematic on the CI server... -->
+	<!--distributionManagement>
 		<repository>
 			<id>maestro-deploy</id>
 			<name>VA Public Releases Repository</name>
-			<url>http://va-archiva-host:8082/archiva/repository/va-releases/</url>
+			<url>http://va-archiva-host:8082/archiva/repository/data-files/</url>
 		</repository>
-		<snapshotRepository>
-			<id>maestro-deploy</id>
-			<name>VA Public Snapshots Repository</name>
-			<url>http://va-archiva-host:8082/archiva/repository/va-snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
+	</distributionManagement-->
 
 	<!-- Standard build setup -->
 	<build>
