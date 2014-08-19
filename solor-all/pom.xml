@@ -1,20 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<!-- Parent project -->
 	<parent>
 		<groupId>gov.va.isaac.db</groupId>
 		<artifactId>isaac-db-parent</artifactId>
-		<version>1.0-Sprint_11-SNAPSHOT</version>
+		<version>1.0-Sprint_12-SNAPSHOT</version>
 	</parent>
 
 	<!-- Project metadata -->
 	<packaging>pom</packaging>
-	<groupId>gov.va.isaac.db.modules</groupId>
 	<artifactId>solor-all</artifactId>
+	<version>2014.08.19</version>
+	<description>A SOLOR database, including sct-econcept-2014.01.31-build-7-active-only, loinc-econcept-2.46-loader-2.8 and rxNorm-eConcept-2014.03.03-loader-1.3.1</description>
 
-	<!-- Dependencies to data -->
+	<!-- Dependencies -->
 	<dependencies>
 		<dependency>
 			<groupId>org.ihtsdo.sct.baseline</groupId>
@@ -22,6 +22,27 @@
 			<version>2014.01.31-build-7</version>
 			<classifier>active-only</classifier>
 			<type>zip</type>
+			<scope>compile</scope>
+			<optional>true</optional>  <!-- Not needed at runtime -->
+			<!-- Sigh... SCT is defined in a particularly silly way... need to exclude all of these, to not waste everyones time fetching them -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.ihtsdo.sct.rf2</groupId>
+					<artifactId>sct-rf2-arf-econcept-full</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.ihtsdo.sct</groupId>
+					<artifactId>mrcm-refset-specs</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.ihtsdo</groupId>
+					<artifactId>tk-spelling-variants</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.ihtsdo</groupId>
+					<artifactId>tk-case-sensitive-words</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>gov.va.oia.terminology.converters</groupId>
@@ -46,7 +67,7 @@
 				<version>2.2</version>
 				<executions>
 					<execution>
-						<id>unpack-sct-econcept</id>
+						<id>unpack-econcept</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>unpack-dependencies</goal>
@@ -89,7 +110,6 @@
 				<artifactId>mojos</artifactId>
 				<version>${isaac.version}</version>
 				<executions>
-
 					<execution>
 						<id>setup</id>
 						<phase>generate-sources</phase>
@@ -136,9 +156,56 @@
 								<!-- RxNorm Path -->
 								<uuid>d1cfff32-d25d-57e6-8cc4-fd433cd1096d</uuid>
 							</originPathUuids>
-							<!-- The parent of ISAAC Path, the "release" concept, also parent of 
-								SNOMED Core -->
+							<!-- The parent of ISAAC Path, the "release" concept, also parent of SNOMED Core -->
 							<parentPathUuid>88f89cc0-1d94-34a4-85ed-aa1949079314</parentPathUuid>
+						</configuration>
+					</execution>
+
+					<!-- Creates the Information model metadata -->
+					<execution>
+						<id>create-information-models</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>create-root-concept</goal>
+						</goals>
+						<configuration>
+							<rootFsn>Information Models</rootFsn>
+							<rootPrefTerm>Information Models</rootPrefTerm>
+							<childFsns>
+								<fsn>Clinical Element Model</fsn>
+								<fsn>Federal Health Information Model</fsn>
+								<fsn>Health eDecision</fsn>
+							</childFsns>
+							<childPrefTerms>
+								<prefTerm>Clinical Element Model</prefTerm>
+								<prefTerm>Federal Health Information Model</prefTerm>
+								<prefTerm>Health eDecision</prefTerm>
+							</childPrefTerms>
+						</configuration>
+					</execution>
+
+					<!-- Creates the ISAAC root -->
+					<execution>
+						<id>create-isaac-root</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>create-root-concept</goal>
+						</goals>
+						<configuration>
+							<rootFsn>ISAAC Root</rootFsn>
+							<rootPrefTerm>ISAAC Root</rootPrefTerm>
+							<childUuids>
+								<!-- Terminology Auxiliary concept -->
+								<uuid>f4d2fabc-7e96-3b3a-a348-ae867ba74029</uuid>
+								<!-- Refset Auxiliary Concept -->
+								<uuid>1c698388-c309-3dfa-96f0-86248753fac5</uuid>
+								<!-- SNOMED CT Concept -->
+								<uuid>ee9ac5d2-a07c-3981-a57a-f7f26baf38d8</uuid>
+								<!-- LOINC -->
+								<uuid>3958d043-9e8c-508e-bf6d-fd9c83a856da</uuid>
+								<!-- Information Models -->
+								<uuid>ab09b185-b93d-577b-a350-622be832e6c7</uuid>
+							</childUuids>
 						</configuration>
 					</execution>
 
@@ -156,48 +223,43 @@
 				</executions>
 			</plugin>
 
-			<!-- Assemble econcepts file into data artifact -->
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>truezip-maven-plugin</artifactId>
-				<version>1.2</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
 				<executions>
 					<execution>
-						<id>copy-db-into-zip</id>
-						<goals>
-							<goal>copy</goal>
-						</goals>
+						<id>zip</id>
 						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
 						<configuration>
-							<fileset>
-								<directory>${project.build.directory}/berkeley-db</directory>
-								<includes>
-									<include>*</include>
-								</includes>
-								<outputDirectory>${project.build.directory}/${project.build.finalName}.zip</outputDirectory>
-							</fileset>
+							<descriptors>
+								<descriptor>${basedir}/src/assembly/assembly.xml</descriptor>
+							</descriptors>
+							<attach>false</attach>
+							<encoding>UTF-8</encoding>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-
-			<!-- Atttach zip file as an artifact -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.9</version>
+				<version>1.8</version>
 				<executions>
 					<execution>
-						<id>attach-artifacts</id>
-						<phase>package</phase>
+						<id>attach-artifact</id>
 						<goals>
 							<goal>attach-artifact</goal>
 						</goals>
 						<configuration>
 							<artifacts>
 								<artifact>
-									<file>${project.build.directory}/${project.build.finalName}.zip</file>
-									<type>zip</type>
+									<type>bdb.zip</type>
+									<file>${project.build.directory}/${project.build.finalName}-active-only.bdb.zip</file>
+									<classifier>active-only</classifier>
 								</artifact>
 							</artifacts>
 						</configuration>
