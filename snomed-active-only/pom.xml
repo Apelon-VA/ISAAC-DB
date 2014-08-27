@@ -129,6 +129,7 @@
 						<configuration>
 							<rootFsn>Information Models</rootFsn>
 							<rootPrefTerm>Information Models</rootPrefTerm>
+                    <!-- NOTE: the values here match the InformationModelType enum values -->
 							<childFsns>
 								<fsn>Clinical Element Model</fsn>
 								<fsn>Federal Health Information Model</fsn>
