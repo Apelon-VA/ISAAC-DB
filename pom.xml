@@ -4,7 +4,7 @@
 	<!-- Project metadata -->
 	<groupId>gov.va.isaac.db</groupId>
 	<artifactId>isaac-db-parent</artifactId>
-	<version>1.0-Sprint_12-SNAPSHOT</version>
+	<version>1.0-Sprint_12</version>
 	<packaging>pom</packaging>
 	<name>ISAAC DB Project Assembly Parent</name>
 	<url>https://csfe.aceworkspace.net/sf/projects/veterans_administration_project/</url>
