@@ -11,7 +11,7 @@
 	<!-- Project metadata -->
 	<packaging>pom</packaging>
 	<artifactId>solor-snomed</artifactId>
-	<version>2014.08.19</version>
+	<version>2014.09.13</version>
 	<description>A SOLOR database, including sct-econcept-2014.01.31-build-7-active-only</description>
 
 	<!-- Dependencies -->
@@ -96,7 +96,16 @@
 							<econFileStrings>
 								<econFileString>${project.build.directory}/generated-resources/eConcepts.jbin</econFileString>
 							</econFileStrings>
-							<bdbFolderLocation>${project.build.directory}/berkeley-db</bdbFolderLocation>
+							<terminologyRoots>
+								<MojoConceptSpec>
+									<fsn>SNOMED CT Concept (SNOMED RT+CTV3)</fsn>
+									<uuid>ee9ac5d2-a07c-3981-a57a-f7f26baf38d8</uuid>
+								</MojoConceptSpec>
+								<MojoConceptSpec>
+									<fsn>LOINC</fsn>
+									<uuid>3958d043-9e8c-508e-bf6d-fd9c83a856da</uuid>
+								</MojoConceptSpec>
+							</terminologyRoots>
 						</configuration>
 					</execution>
 
@@ -119,62 +128,13 @@
 						</configuration>
 					</execution>
 
-					<!-- Creates the Information model metadata -->
-					<execution>
-						<id>create-information-models</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>create-root-concept</goal>
-						</goals>
-						<configuration>
-							<rootFsn>Information Models</rootFsn>
-							<rootPrefTerm>Information Models</rootPrefTerm>
-                    <!-- NOTE: the values here match the InformationModelType enum values -->
-							<childFsns>
-								<fsn>Clinical Element Model</fsn>
-								<fsn>Federal Health Information Model</fsn>
-								<fsn>Health eDecision</fsn>
-							</childFsns>
-							<childPrefTerms>
-								<prefTerm>Clinical Element Model</prefTerm>
-								<prefTerm>Federal Health Information Model</prefTerm>
-								<prefTerm>Health eDecision</prefTerm>
-							</childPrefTerms>
-						</configuration>
-					</execution>
-
-					<!-- Creates the ISAAC root -->
-					<execution>
-						<id>create-isaac-root</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>create-root-concept</goal>
-						</goals>
-						<configuration>
-							<rootFsn>ISAAC Root</rootFsn>
-							<rootPrefTerm>ISAAC Root</rootPrefTerm>
-							<childUuids>
-								<!-- Terminology Auxiliary concept -->
-								<uuid>f4d2fabc-7e96-3b3a-a348-ae867ba74029</uuid>
-								<!-- Refset Auxiliary Concept -->
-								<uuid>1c698388-c309-3dfa-96f0-86248753fac5</uuid>
-								<!-- SNOMED CT Concept -->
-								<uuid>ee9ac5d2-a07c-3981-a57a-f7f26baf38d8</uuid>
-								<!-- Information Models -->
-								<uuid>ab09b185-b93d-577b-a350-622be832e6c7</uuid>
-							</childUuids>
-						</configuration>
-					</execution>
-
 					<execution>
 						<id>shutdown</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>shutdown-terminology-store</goal>
 						</goals>
-						<configuration>
-							<bdbFolderLocation>${project.build.directory}/berkeley-db</bdbFolderLocation>
-						</configuration>
+						<configuration/>
 					</execution>
 
 				</executions>
