@@ -11,7 +11,7 @@
 	<!-- Project metadata -->
 	<packaging>pom</packaging>
 	<artifactId>solor-snomed</artifactId>
-	<version>2014.09.13</version>
+	<version>2014.09.14</version>
 	<description>A SOLOR database, including sct-econcept-2014.01.31-build-7-active-only</description>
 
 	<!-- Dependencies -->
@@ -100,10 +100,6 @@
 								<MojoConceptSpec>
 									<fsn>SNOMED CT Concept (SNOMED RT+CTV3)</fsn>
 									<uuid>ee9ac5d2-a07c-3981-a57a-f7f26baf38d8</uuid>
-								</MojoConceptSpec>
-								<MojoConceptSpec>
-									<fsn>LOINC</fsn>
-									<uuid>3958d043-9e8c-508e-bf6d-fd9c83a856da</uuid>
 								</MojoConceptSpec>
 							</terminologyRoots>
 						</configuration>
