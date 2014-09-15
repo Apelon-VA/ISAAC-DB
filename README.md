@@ -11,8 +11,8 @@ this directory.
 The current profiles are:
 
 -P solor-all
--P snomed-loinc
--P snomed-active-only
+-P sct-loinc
+-P sct
 
 For either method of execution - use the following maven commands:
 

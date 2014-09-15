@@ -69,21 +69,21 @@
 	<!-- Sub modules (via profiles) -->
 	<profiles>
 		<profile>
-			<id>snomed-active-only</id>
+			<id>sct</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<modules>
-				<module>snomed-active-only</module>
+				<module>solor-snomed-active-only</module>
 			</modules>
 		</profile>
 		<profile>
-			<id>snomed-loinc</id>
+			<id>sct-loinc</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<modules>
-				<module>snomed-loinc</module>
+				<module>solor-snomed-loinc</module>
 			</modules>
 		</profile>
 		<profile>
