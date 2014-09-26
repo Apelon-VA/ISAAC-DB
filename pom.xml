@@ -4,7 +4,7 @@
 	<!-- Project metadata -->
 	<groupId>gov.va.isaac.db</groupId>
 	<artifactId>isaac-db-parent</artifactId>
-	<version>1.0-Sprint_13-SNAPSHOT</version>
+	<version>1.0-Sprint_14-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>ISAAC DB Project Assembly Parent</name>
 	<url>https://csfe.aceworkspace.net/sf/projects/veterans_administration_project/</url>
@@ -14,7 +14,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<isaac.version>1.0-Sprint_12</isaac.version>
+		<isaac.version>1.0-Sprint_14-SNAPSHOT</isaac.version>
 	</properties>
 
 	<!-- License info -->
@@ -69,21 +69,21 @@
 	<!-- Sub modules (via profiles) -->
 	<profiles>
 		<profile>
-			<id>snomed-active-only</id>
+			<id>sct</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<modules>
-				<module>snomed-active-only</module>
+				<module>solor-snomed-active-only</module>
 			</modules>
 		</profile>
 		<profile>
-			<id>snomed-loinc</id>
+			<id>sct-loinc</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<modules>
-				<module>snomed-loinc</module>
+				<module>solor-snomed-loinc</module>
 			</modules>
 		</profile>
 		<profile>
