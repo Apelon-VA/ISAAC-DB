@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>gov.va.isaac.db</groupId>
 		<artifactId>isaac-db-parent</artifactId>
-		<version>1.0-Sprint_13-SNAPSHOT</version>
+		<version>1.0-Sprint_14-SNAPSHOT</version>
 	</parent>
 
 	<!-- Project metadata -->
@@ -94,7 +94,7 @@
 						<configuration>
 							<setupAndShutdown>false</setupAndShutdown>
 							<econFileStrings>
-								<econFileString>${project.build.directory}/generated-resources/eConcepts.jbin</econFileString>
+                              <econFileString>${project.build.directory}/generated-resources/eConcepts.jbin</econFileString>
 							</econFileStrings>
 							<terminologyRoots>
 								<MojoConceptSpec>
@@ -105,7 +105,7 @@
 						</configuration>
 					</execution>
 
-					<!-- Creates the ISAAC develompent path - f5c0a264-15af-5b94-a964-bb912ea5634f -->
+					<!-- Creates the ISAAC development path - f5c0a264-15af-5b94-a964-bb912ea5634f -->
 					<execution>
 						<id>create-isaac-path</id>
 						<phase>generate-sources</phase>
@@ -124,6 +124,16 @@
 						</configuration>
 					</execution>
 
+                    <!-- Creates the information model metadata -->
+                    <execution>
+                      <id>create-info-model-metadata</id>
+                      <phase>generate-sources</phase>
+                      <goals>
+                        <goal>create-metadata</goal>
+                      </goals>
+                    </execution>
+
+                    <!-- Shutdown database -->
 					<execution>
 						<id>shutdown</id>
 						<phase>generate-sources</phase>
