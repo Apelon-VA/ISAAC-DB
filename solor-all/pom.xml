@@ -134,7 +134,7 @@
 						<configuration>
 							<setupAndShutdown>false</setupAndShutdown>
 							<econFileStrings>
- 								<econFileString>${project.build.directory}/generated-resources/sct-econcept/eConcepts.jbin</econFileString>
+								<econFileString>${project.build.directory}/generated-resources/sct-econcept/eConcepts.jbin</econFileString>
 								<econFileString>${project.build.directory}/generated-resources/RxNorm-econcept/RRF-RXN.jbin</econFileString>
 								<econFileString>${project.build.directory}/generated-resources/loinc-econcept/loincEConcepts.jbin</econFileString>
 							</econFileStrings>
@@ -174,16 +174,16 @@
 						</configuration>
 					</execution>
 
-                    <!-- Creates the information model metadata -->
-                    <execution>
-                      <id>create-info-model-metadata</id>
-                      <phase>generate-sources</phase>
-                      <goals>
-                        <goal>create-metadata</goal>
-                      </goals>
-                    </execution>
+					<!-- Creates the information model metadata -->
+					<execution>
+						<id>create-info-model-metadata</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>create-metadata</goal>
+						</goals>
+					</execution>
 
-                    <!-- shutdown database -->
+					<!-- shutdown database -->
 					<execution>
 						<id>shutdown</id>
 						<phase>generate-sources</phase>
