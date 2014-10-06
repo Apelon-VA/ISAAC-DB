@@ -152,16 +152,16 @@
 					</execution>
 
 
-                    <!-- Creates the information model metadata -->
-                    <execution>
-                      <id>create-info-model-metadata</id>
-                      <phase>generate-sources</phase>
-                      <goals>
-                        <goal>create-metadata</goal>
-                      </goals>
-                    </execution>
+					<!-- Creates the information model metadata -->
+					<execution>
+						<id>create-info-model-metadata</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>create-metadata</goal>
+						</goals>
+					</execution>
 
-                    <!-- Shutdown database -->
+					<!-- Shutdown database -->
 					<execution>
 						<id>shutdown</id>
 						<phase>generate-sources</phase>
