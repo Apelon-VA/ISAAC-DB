@@ -1,18 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<!-- Parent project -->
-	<parent>
-		<groupId>gov.va.isaac.db</groupId>
-		<artifactId>isaac-db-parent</artifactId>
-		<version>1.0-Sprint_14-SNAPSHOT</version>
-	</parent>
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <!-- Parent project -->
+  <parent>
+    <groupId>gov.va.isaac.db</groupId>
+    <artifactId>isaac-db-parent</artifactId>
+    <version>1.0-Sprint_14-SNAPSHOT</version>
+  </parent>
 
-	<!-- Project metadata -->
-	<packaging>pom</packaging>
-	<artifactId>solor-test</artifactId>
-	<version>2014.09.14</version>
-	<description>A SOLOR test database for testing new features</description>
+  <!-- Project metadata -->
+  <packaging>pom</packaging>
+  <artifactId>solor-test</artifactId>
+  <version>2014.09.14</version>
+  <description>A SOLOR test database for testing new features</description>
 
 
   <!-- Dependencies -->
@@ -25,7 +25,8 @@
       <type>zip</type>
       <scope>compile</scope>
       <optional>true</optional>  <!-- Not needed at runtime -->
-      <!-- Sigh... SCT is defined in a particularly silly way... need to exclude all of these, to not waste everyones time fetching them -->
+      <!-- Sigh... SCT is defined in a particularly silly way... need to exclude 
+        all of these, to not waste everyones time fetching them -->
       <exclusions>
         <exclusion>
           <groupId>org.ihtsdo.sct.rf2</groupId>
@@ -95,8 +96,8 @@
             <configuration>
               <setupAndShutdown>false</setupAndShutdown>
               <econFileStrings>
-                <econFileString>${basedir}/src/eConcepts.jbin</econFileString>
                 <econFileString>${project.build.directory}/generated-resources/eConcepts.jbin</econFileString>
+                <econFileString>${basedir}/src/eConcepts.jbin</econFileString>
               </econFileStrings>
               <terminologyRoots>
                 <MojoConceptSpec>
@@ -121,11 +122,12 @@
                 <!-- SNOMED Core -->
                 <uuid>8c230474-9f11-30ce-9cad-185a96fd03a2</uuid>
               </originPathUuids>
-              <!-- The parent of ISAAC Path, the "release" concept, also parent of SNOMED Core -->
+              <!-- The parent of ISAAC Path, the "release" concept, also parent of 
+                SNOMED Core -->
               <parentPathUuid>88f89cc0-1d94-34a4-85ed-aa1949079314</parentPathUuid>
             </configuration>
           </execution>
-          
+
           <execution>
             <id>create-isaac-dev-path</id>
             <phase>generate-sources</phase>
@@ -138,11 +140,12 @@
               <originPathFsns>
                 <fsn>ISAAC development path origin</fsn>
               </originPathFsns>
-              <!-- The parent of ISAAC Path, the "release" concept, also parent of SNOMED Core -->
+              <!-- The parent of ISAAC Path, the "release" concept, also parent of 
+                SNOMED Core -->
               <parentPathUuid>88f89cc0-1d94-34a4-85ed-aa1949079314</parentPathUuid>
             </configuration>
           </execution>
-          
+
           <execution>
             <id>create-isaac-release-path</id>
             <phase>generate-sources</phase>
@@ -155,7 +158,8 @@
               <originPathFsns>
                 <fsn>ISAAC development path</fsn>
               </originPathFsns>
-              <!-- The parent of ISAAC Path, the "release" concept, also parent of SNOMED Core -->
+              <!-- The parent of ISAAC Path, the "release" concept, also parent of 
+                SNOMED Core -->
               <parentPathUuid>88f89cc0-1d94-34a4-85ed-aa1949079314</parentPathUuid>
             </configuration>
           </execution>
@@ -176,7 +180,7 @@
             <goals>
               <goal>shutdown-terminology-store</goal>
             </goals>
-            <configuration/>
+            <configuration />
           </execution>
 
         </executions>
