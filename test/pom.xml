@@ -1,0 +1,231 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- Parent project -->
+	<parent>
+		<groupId>gov.va.isaac.db</groupId>
+		<artifactId>isaac-db-parent</artifactId>
+		<version>1.0-Sprint_14-SNAPSHOT</version>
+	</parent>
+
+	<!-- Project metadata -->
+	<packaging>pom</packaging>
+	<artifactId>solor-test</artifactId>
+	<version>2014.09.14</version>
+	<description>A SOLOR test database for testing new features</description>
+
+
+  <!-- Dependencies -->
+  <dependencies>
+    <dependency>
+      <groupId>org.ihtsdo.sct.baseline</groupId>
+      <artifactId>sct-econcept</artifactId>
+      <version>2014.01.31-build-7</version>
+      <classifier>active-only</classifier>
+      <type>zip</type>
+      <scope>compile</scope>
+      <optional>true</optional>  <!-- Not needed at runtime -->
+      <!-- Sigh... SCT is defined in a particularly silly way... need to exclude all of these, to not waste everyones time fetching them -->
+      <exclusions>
+        <exclusion>
+          <groupId>org.ihtsdo.sct.rf2</groupId>
+          <artifactId>sct-rf2-arf-econcept-full</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.ihtsdo.sct</groupId>
+          <artifactId>mrcm-refset-specs</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.ihtsdo</groupId>
+          <artifactId>tk-spelling-variants</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.ihtsdo</groupId>
+          <artifactId>tk-case-sensitive-words</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+  </dependencies>
+
+  <!-- Unpack data projects, load econcepts files, create ISAAC path, repack database -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.2</version>
+        <executions>
+          <execution>
+            <id>unpack-econcept</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeGroupIds>org.ihtsdo.sct.baseline</includeGroupIds>
+              <includeArtifactIds>sct-econcept</includeArtifactIds>
+              <outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>gov.va.isaac.modules</groupId>
+        <artifactId>mojos</artifactId>
+        <version>${isaac.version}</version>
+        <executions>
+          <execution>
+            <id>setup</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>setup-terminology-store</goal>
+            </goals>
+            <configuration>
+              <bdbFolderLocation>${project.build.directory}/berkeley-db</bdbFolderLocation>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>load-econcept</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>load-index-bdb</goal>
+            </goals>
+            <configuration>
+              <setupAndShutdown>false</setupAndShutdown>
+              <econFileStrings>
+                <econFileString>${basedir}/src/eConcepts.jbin</econFileString>
+                <econFileString>${project.build.directory}/generated-resources/eConcepts.jbin</econFileString>
+              </econFileStrings>
+              <terminologyRoots>
+                <MojoConceptSpec>
+                  <fsn>SNOMED CT Concept (SNOMED RT+CTV3)</fsn>
+                  <uuid>ee9ac5d2-a07c-3981-a57a-f7f26baf38d8</uuid>
+                </MojoConceptSpec>
+              </terminologyRoots>
+            </configuration>
+          </execution>
+
+          <!-- Creates the ISAAC paths - f5c0a264-15af-5b94-a964-bb912ea5634f -->
+          <execution>
+            <id>create-isaac-origin-path</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>create-path</goal>
+            </goals>
+            <configuration>
+              <pathFsn>ISAAC development path origin</pathFsn>
+              <pathPrefTerm>ISAAC development path origin</pathPrefTerm>
+              <originPathUuids>
+                <!-- SNOMED Core -->
+                <uuid>8c230474-9f11-30ce-9cad-185a96fd03a2</uuid>
+              </originPathUuids>
+              <!-- The parent of ISAAC Path, the "release" concept, also parent of SNOMED Core -->
+              <parentPathUuid>88f89cc0-1d94-34a4-85ed-aa1949079314</parentPathUuid>
+            </configuration>
+          </execution>
+          
+          <execution>
+            <id>create-isaac-dev-path</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>create-path</goal>
+            </goals>
+            <configuration>
+              <pathFsn>ISAAC development path</pathFsn>
+              <pathPrefTerm>ISAAC development path</pathPrefTerm>
+              <originPathFsns>
+                <fsn>ISAAC development path origin</fsn>
+              </originPathFsns>
+              <!-- The parent of ISAAC Path, the "release" concept, also parent of SNOMED Core -->
+              <parentPathUuid>88f89cc0-1d94-34a4-85ed-aa1949079314</parentPathUuid>
+            </configuration>
+          </execution>
+          
+          <execution>
+            <id>create-isaac-release-path</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>create-path</goal>
+            </goals>
+            <configuration>
+              <pathFsn>ISAAC release path</pathFsn>
+              <pathPrefTerm>ISAAC release path</pathPrefTerm>
+              <originPathFsns>
+                <fsn>ISAAC development path</fsn>
+              </originPathFsns>
+              <!-- The parent of ISAAC Path, the "release" concept, also parent of SNOMED Core -->
+              <parentPathUuid>88f89cc0-1d94-34a4-85ed-aa1949079314</parentPathUuid>
+            </configuration>
+          </execution>
+
+          <!-- Creates the information model metadata -->
+          <execution>
+            <id>create-info-model-metadata</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>create-metadata</goal>
+            </goals>
+          </execution>
+
+          <!-- Shutdown database -->
+          <execution>
+            <id>shutdown</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>shutdown-terminology-store</goal>
+            </goals>
+            <configuration/>
+          </execution>
+
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <id>zip</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptors>
+                <descriptor>${basedir}/src/assembly/assembly.xml</descriptor>
+              </descriptors>
+              <attach>false</attach>
+              <encoding>UTF-8</encoding>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <id>attach-artifact</id>
+            <goals>
+              <goal>attach-artifact</goal>
+            </goals>
+            <configuration>
+              <artifacts>
+                <artifact>
+                  <type>bdb.zip</type>
+                  <file>${project.build.directory}/${project.build.finalName}-active-only.bdb.zip</file>
+                  <classifier>active-only</classifier>
+                </artifact>
+              </artifacts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+</project>
