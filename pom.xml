@@ -4,7 +4,7 @@
 	<!-- Project metadata -->
 	<groupId>gov.va.isaac.db</groupId>
 	<artifactId>isaac-db-parent</artifactId>
-	<version>1.0-Sprint_14-SNAPSHOT</version>
+	<version>1.0-Sprint_15-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>ISAAC DB Project Assembly Parent</name>
 	<url>https://csfe.aceworkspace.net/sf/projects/veterans_administration_project/</url>
@@ -35,7 +35,7 @@
 		<connection>scm:git:git@github.com:Apelon-VA/ISAAC-DB.git</connection>
 		<developerConnection>scm:git:git@github.com:Apelon-VA/ISAAC-DB.git</developerConnection>
 		<url>https://github.com/Apelon-VA/ISAAC-DB</url>
-		<tag>develop-force-conflict-</tag>
+		<tag>develop</tag>
 	</scm>
 
 	<!-- Standard build setup -->
