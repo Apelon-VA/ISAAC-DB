@@ -24,8 +24,8 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
 			<distribution>repo</distribution>
 			<comments>Copyright Notice
-    This is a work of the U.S. Government and is not subject to copyright
-    protection in the United States. Foreign copyrights may apply.
+	This is a work of the U.S. Government and is not subject to copyright
+	protection in the United States. Foreign copyrights may apply.
 			</comments>
 		</license>
 	</licenses>
@@ -83,6 +83,15 @@
 			</activation>
 			<modules>
 				<module>solor-all</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<modules>
+				<module>test</module>
 			</modules>
 		</profile>
 	</profiles>
