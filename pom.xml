@@ -14,7 +14,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<isaac.version>1.0-Sprint_13</isaac.version>
+		<isaac.version>1.0-Sprint_14</isaac.version>
 	</properties>
 
 	<!-- License info -->
@@ -37,16 +37,6 @@
 		<url>https://github.com/Apelon-VA/ISAAC-DB</url>
 		<tag>master</tag>
 	</scm>
-
-	<!-- Maven repository -->
-	<!-- I don't normally define these here, but the -D overrides are being problematic on the CI server... -->
-	<!--distributionManagement>
-		<repository>
-			<id>maestro</id>
-			<name>VA Public Releases Repository</name>
-			<url>https://va.maestrodev.com/archiva/repository/data-files/</url>
-		</repository>
-	</distributionManagement-->
 
 	<!-- Standard build setup -->
 	<build>
