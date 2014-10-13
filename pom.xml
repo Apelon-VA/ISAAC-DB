@@ -4,7 +4,7 @@
 	<!-- Project metadata -->
 	<groupId>gov.va.isaac.db</groupId>
 	<artifactId>isaac-db-parent</artifactId>
-	<version>1.0-Sprint_14-SNAPSHOT</version>
+	<version>1.0-Sprint_15-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>ISAAC DB Project Assembly Parent</name>
 	<url>https://csfe.aceworkspace.net/sf/projects/veterans_administration_project/</url>
@@ -14,7 +14,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<isaac.version>1.0-Sprint_14-SNAPSHOT</isaac.version>
+		<isaac.version>1.0-Sprint_14</isaac.version>
 	</properties>
 
 	<!-- License info -->
@@ -24,8 +24,8 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
 			<distribution>repo</distribution>
 			<comments>Copyright Notice
-    This is a work of the U.S. Government and is not subject to copyright
-    protection in the United States. Foreign copyrights may apply.
+	This is a work of the U.S. Government and is not subject to copyright
+	protection in the United States. Foreign copyrights may apply.
 			</comments>
 		</license>
 	</licenses>
@@ -37,16 +37,6 @@
 		<url>https://github.com/Apelon-VA/ISAAC-DB</url>
 		<tag>master</tag>
 	</scm>
-
-	<!-- Maven repository -->
-	<!-- I don't normally define these here, but the -D overrides are being problematic on the CI server... -->
-	<!--distributionManagement>
-		<repository>
-			<id>maestro</id>
-			<name>VA Public Releases Repository</name>
-			<url>https://va.maestrodev.com/archiva/repository/data-files/</url>
-		</repository>
-	</distributionManagement-->
 
 	<!-- Standard build setup -->
 	<build>
@@ -93,6 +83,15 @@
 			</activation>
 			<modules>
 				<module>solor-all</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<modules>
+				<module>test</module>
 			</modules>
 		</profile>
 	</profiles>

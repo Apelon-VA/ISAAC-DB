@@ -5,14 +5,15 @@
   <parent>
     <groupId>gov.va.isaac.db</groupId>
     <artifactId>isaac-db-parent</artifactId>
-    <version>1.0-Sprint_15-SNAPSHOT</version>
+    <version>1.0-Sprint_14-SNAPSHOT</version>
   </parent>
 
   <!-- Project metadata -->
   <packaging>pom</packaging>
-  <artifactId>solor-snomed-loinc</artifactId>
+  <artifactId>solor-test</artifactId>
   <version>2014.09.14</version>
-  <description>A SOLOR database, including sct-econcept-2014.01.31-build-7-active-only and loinc-econcept-2.46-loader-2.8</description>
+  <description>A SOLOR test database for testing new features</description>
+
 
   <!-- Dependencies -->
   <dependencies>
@@ -45,14 +46,6 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <dependency>
-      <groupId>gov.va.oia.terminology.converters</groupId>
-      <artifactId>loinc-econcept</artifactId>
-      <version>2.46-loader-2.8</version>
-      <type>zip</type>
-      <scope>compile</scope>
-      <optional>true</optional>  <!-- Not needed at runtime -->
-    </dependency>
   </dependencies>
 
   <!-- Unpack data projects, load econcepts files, create ISAAC path, repack database -->
@@ -72,19 +65,7 @@
             <configuration>
               <includeGroupIds>org.ihtsdo.sct.baseline</includeGroupIds>
               <includeArtifactIds>sct-econcept</includeArtifactIds>
-              <outputDirectory>${project.build.directory}/generated-resources/sct-econcept</outputDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <id>unpack-loinc-econcept</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <configuration>
-              <includeGroupIds>gov.va.oia.terminology.converters</includeGroupIds>
-              <includeArtifactIds>loinc-econcept</includeArtifactIds>
-              <outputDirectory>${project.build.directory}/generated-resources/loinc-econcept</outputDirectory>
+              <outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
             </configuration>
           </execution>
         </executions>
@@ -96,7 +77,7 @@
         <version>${isaac.version}</version>
         <executions>
           <execution>
-            <id>setup store</id>
+            <id>setup</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>setup-terminology-store</goal>
@@ -115,17 +96,13 @@
             <configuration>
               <setupAndShutdown>false</setupAndShutdown>
               <econFileStrings>
-                <econFileString>${project.build.directory}/generated-resources/sct-econcept/eConcepts.jbin</econFileString>
-                <econFileString>${project.build.directory}/generated-resources/loinc-econcept/loincEConcepts.jbin</econFileString>
+                <econFileString>${project.build.directory}/generated-resources/eConcepts.jbin</econFileString>
+                <econFileString>${basedir}/src/eConcepts.jbin</econFileString>
               </econFileStrings>
               <terminologyRoots>
                 <MojoConceptSpec>
                   <fsn>SNOMED CT Concept (SNOMED RT+CTV3)</fsn>
                   <uuid>ee9ac5d2-a07c-3981-a57a-f7f26baf38d8</uuid>
-                </MojoConceptSpec>
-                <MojoConceptSpec>
-                  <fsn>LOINC</fsn>
-                  <uuid>3958d043-9e8c-508e-bf6d-fd9c83a856da</uuid>
                 </MojoConceptSpec>
               </terminologyRoots>
             </configuration>
@@ -186,7 +163,6 @@
               <parentPathUuid>88f89cc0-1d94-34a4-85ed-aa1949079314</parentPathUuid>
             </configuration>
           </execution>
-
 
           <!-- Creates the information model metadata -->
           <execution>
