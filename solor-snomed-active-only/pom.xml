@@ -10,7 +10,7 @@
 
   <!-- Project metadata -->
   <packaging>pom</packaging>
-  <artifactId>solor-snomed</artifactId>
+  <artifactId>solor-snomed-active-only</artifactId>
   <version>2014.10.13</version>
   <description>A SOLOR database, including sct-econcept-2014.01.31-build-8-active-only</description>
 
@@ -218,8 +218,8 @@
             <configuration>
               <artifacts>
                 <artifact>
-                  <type>bdb.zip</type>
-                  <file>${project.build.directory}/${project.build.finalName}-active-only.bdb.zip</file>
+                  <type>zip</type>
+                  <file>${project.build.directory}/${project.build.finalName}-active-only.zip</file>
                   <classifier>active-only</classifier>
                 </artifact>
               </artifacts>

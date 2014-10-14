@@ -220,8 +220,8 @@
             <configuration>
               <artifacts>
                 <artifact>
-                  <type>bdb.zip</type>
-                  <file>${project.build.directory}/${project.build.finalName}-active-only.bdb.zip</file>
+                  <type>zip</type>
+                  <file>${project.build.directory}/${project.build.finalName}-active-only.zip</file>
                   <classifier>active-only</classifier>
                 </artifact>
               </artifacts>
