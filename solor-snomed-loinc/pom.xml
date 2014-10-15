@@ -244,9 +244,9 @@
             <configuration>
               <artifacts>
                 <artifact>
-                  <type>zip</type>
+                  <type>bdb.zip</type>
                   <file>${project.build.directory}/${project.build.finalName}-active-only.bdb.zip</file>
-                  <classifier>bdb</classifier>
+                  <classifier>active-only</classifier>
                 </artifact>
               </artifacts>
             </configuration>
