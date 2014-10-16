@@ -14,6 +14,11 @@
   <version>2014.10.13</version>
   <description>A SOLOR database, including sct-econcept-2014.01.31-build-8-active-only and loinc-econcept-2.48-loader-2.9</description>
 
+  <properties>
+    <!-- For no classifier, leave this blank or remove it entirely-->
+    <resultArtifactClassifier>active-only</resultArtifactClassifier>
+  </properties>
+
   <!-- Dependencies -->
   <dependencies>
     <dependency>
@@ -102,7 +107,7 @@
               <goal>setup-terminology-store</goal>
             </goals>
             <configuration>
-              <bdbFolderLocation>${project.build.directory}/berkeley-db</bdbFolderLocation>
+              <bdbFolderLocation>${project.build.directory}/${project.build.finalName}${resultArtifactClassifierWithLeadingHyphen}.bdb/berkeley-db</bdbFolderLocation>
             </configuration>
           </execution>
 
@@ -189,7 +194,6 @@
             </configuration>
           </execution>
 
-
           <!-- Creates the information model metadata -->
           <execution>
             <id>create-info-model-metadata</id>
@@ -247,8 +251,11 @@
               <artifacts>
                 <artifact>
                   <type>bdb.zip</type>
-                  <file>${project.build.directory}/${project.build.finalName}-active-only.bdb.zip</file>
-                  <classifier>active-only</classifier>
+                  <!-- Note that the assembly plugin doesn't use the same classifier - we hack the classifier it returns to be a mis
+                  mash of classifier and part of type.  So there is always a classifier on the produced zip file, even if no classifier
+                  was specified by the user.  During artifact attachment, this classifier/type mess is corrected. -->
+                  <file>${project.build.directory}/${project.build.finalName}-${resultArtifactClassifier}.bdb.zip</file>
+                  <classifier>${resultArtifactClassifier}</classifier>
                 </artifact>
               </artifacts>
             </configuration>
