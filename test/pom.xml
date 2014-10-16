@@ -5,13 +5,13 @@
   <parent>
     <groupId>gov.va.isaac.db</groupId>
     <artifactId>isaac-db-parent</artifactId>
-    <version>1.0-Sprint_14-SNAPSHOT</version>
+    <version>1.0-Sprint_15-SNAPSHOT</version>
   </parent>
 
   <!-- Project metadata -->
   <packaging>pom</packaging>
   <artifactId>solor-test</artifactId>
-  <version>2014.09.14</version>
+  <version>2014.10.23</version>
   <description>A SOLOR test database for testing new features</description>
 
 
@@ -20,7 +20,7 @@
     <dependency>
       <groupId>org.ihtsdo.sct.baseline</groupId>
       <artifactId>sct-econcept</artifactId>
-      <version>2014.01.31-build-7</version>
+      <version>2014.01.31-build-8</version>
       <classifier>active-only</classifier>
       <type>zip</type>
       <scope>compile</scope>

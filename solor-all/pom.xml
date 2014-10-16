@@ -165,6 +165,10 @@
               <originPathUuids>
                 <!-- SNOMED Core -->
                 <uuid>8c230474-9f11-30ce-9cad-185a96fd03a2</uuid>
+                <!-- LOINC Path -->
+                <uuid>b2b1cc96-9ca6-5513-aad9-aa21e61ddc29</uuid>
+                <!-- RxNorm Path -->
+                <uuid>d1cfff32-d25d-57e6-8cc4-fd433cd1096d</uuid>
               </originPathUuids>
               <!-- The parent of ISAAC Path, the "release" concept, also parent of 
                 SNOMED Core -->
