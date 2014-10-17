@@ -11,7 +11,7 @@
   <!-- Project metadata -->
   <packaging>pom</packaging>
   <artifactId>solor-all</artifactId>
-  <version>2014.10.13</version>
+  <version>2014.10.17</version>
   <description>A SOLOR database, including sct-econcept-2014.01.31-build-8-active-only, loinc-econcept-2.48-loader-2.9 and rxNorm-eConcept-2014.09.02-loader-1.3.2</description>
 
   <properties>

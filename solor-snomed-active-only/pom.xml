@@ -11,7 +11,7 @@
   <!-- Project metadata -->
   <packaging>pom</packaging>
   <artifactId>solor-snomed</artifactId>
-  <version>2014.10.13</version>
+  <version>2014.10.17</version>
   <description>A SOLOR database, including sct-econcept-2014.01.31-build-8-active-only</description>
 
   <properties>
