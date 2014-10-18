@@ -20,7 +20,7 @@ To just build the DB:
 
 `mvn clean compile`
 
-This will create the DB in the project-specific sub-folder {build-config}/target/berkeley-db
+This will create the DB in the project-specific sub-folder {build-config}/target/[descriptive-name].bdb
 
 To create the DB, and also create a zip package of the DB, run:
 	
