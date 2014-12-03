@@ -4,7 +4,7 @@
 	<!-- Project metadata -->
 	<groupId>gov.va.isaac.db</groupId>
 	<artifactId>isaac-db-parent</artifactId>
-	<version>1.0-Sprint_17-SNAPSHOT</version>
+	<version>1.0-Sprint_16.1</version>
 	<packaging>pom</packaging>
 	<name>ISAAC DB Project Assembly Parent</name>
 	<url>https://csfe.aceworkspace.net/sf/projects/veterans_administration_project/</url>
@@ -14,7 +14,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<isaac.version>1.1.0-Release</isaac.version>
+		<isaac.version>Sprint_16.2</isaac.version>
 		<resultArtifactClassifier />  <!-- this should be overridden by a sub-mojo, if necessary -->
 	</properties>
 
@@ -33,10 +33,7 @@
 
 	<!-- Git -->
 	<scm>
-		<connection>scm:git:git@github.com:Apelon-VA/ISAAC-DB.git</connection>
-		<developerConnection>scm:git:git@github.com:Apelon-VA/ISAAC-DB.git</developerConnection>
 		<url>https://github.com/Apelon-VA/ISAAC-DB</url>
-		<tag>master</tag>
 	</scm>
 
 	<!-- Standard build setup -->
@@ -98,7 +95,26 @@
 					</execution>
 				</executions>
 			</plugin>
-
+			<plugin>
+				<groupId>external.atlassian.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<version>1.0-m4.3</version>
+				<configuration>
+					<pushReleases>false</pushReleases>
+				<noDeploy>true</noDeploy>
+			<noTag>true</noTag>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<scmCommentPrefix>[jgitflow-plugin]</scmCommentPrefix>
+					<enableSshAgent>true</enableSshAgent>
+					<flowInitContext>
+						<masterBranchName>master</masterBranchName>
+						<developBranchName>develop</developBranchName>
+						<featureBranchPrefix>feature-</featureBranchPrefix>
+						<releaseBranchPrefix>release-</releaseBranchPrefix>
+						<hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+					</flowInitContext>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
