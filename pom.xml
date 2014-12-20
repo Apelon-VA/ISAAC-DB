@@ -16,6 +16,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<isaac.version>Sprint_17-SNAPSHOT</isaac.version>
 		<resultArtifactClassifier />  <!-- this should be overridden by a sub-mojo, if necessary -->
+		
+		<!-- Yes, silly, but these don't seem to propagate down properly otherwise, yet another maven bug -->
+		<organization.name>${organization.name}</organization.name>
+		<scm.url>${scm.url}</scm.url>
 	</properties>
 
 	<!-- License info -->
@@ -30,6 +34,11 @@
 			</comments>
 		</license>
 	</licenses>
+	
+	<organization>
+		<name>U.S. Department of Veterans Affairs</name>
+		<url>www.va.gov</url>
+	</organization>
 
 	<!-- Git -->
 	<scm>
