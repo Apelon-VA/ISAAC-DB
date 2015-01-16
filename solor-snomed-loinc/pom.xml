@@ -11,8 +11,8 @@
 	<!-- Project metadata -->
 	<packaging>pom</packaging>
 	<artifactId>solor-snomed-loinc</artifactId>
-	<version>2014.12.20</version>
-	<description>A SOLOR database, including sct-econcept-2014.01.31-build-8-active-only and loinc-econcept-2.48-loader-2.9</description>
+	<version>2015.01.15</version>
+	<description>A SOLOR database, including sct-econcept-2015.01.31-build-5-active-only and loinc-econcept-2.48-loader-3.0.1</description>
 
 	<name>ISAAC DB Assembly</name>
 
@@ -52,7 +52,7 @@
 		<dependency>
 			<groupId>org.ihtsdo.sct.baseline</groupId>
 			<artifactId>sct-econcept</artifactId>
-			<version>2014.01.31-build-8</version>  <!-- This is actually 2014.07, they used the wrong version # -->
+			<version>2015.01.31-build-5</version>
 			<classifier>active-only</classifier>
 			<type>zip</type>
 			<scope>compile</scope>
@@ -81,8 +81,8 @@
 		<dependency>
 			<groupId>gov.va.oia.terminology.converters</groupId>
 			<artifactId>loinc-econcept</artifactId>
-			<version>2.48-loader-2.9</version>
-			<type>zip</type>
+			<version>2.48-loader-3.0.1</version>
+			<type>jbin.zip</type>
 			<scope>compile</scope>
 			<optional>true</optional>  <!-- Not needed at runtime -->
 		</dependency>

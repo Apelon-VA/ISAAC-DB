@@ -11,8 +11,8 @@
 	<!-- Project metadata -->
 	<packaging>pom</packaging>
 	<artifactId>solor-snomed</artifactId>
-	<version>2014.12.20</version>
-	<description>A SOLOR database, including sct-econcept-2014.01.31-build-8-active-only</description>
+	<version>2015.01.15</version>
+	<description>A SOLOR database, including sct-econcept-2015.01.31-build-5-active-only</description>
 	
 	<name>ISAAC DB Assembly</name>
 
@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>org.ihtsdo.sct.baseline</groupId>
 			<artifactId>sct-econcept</artifactId>
-			<version>2014.01.31-build-8</version>  <!-- This is actually 2014.07, they used the wrong version # -->
+			<version>2015.01.31-build-5</version>
 			<classifier>active-only</classifier>
 			<type>zip</type>
 			<scope>compile</scope>
