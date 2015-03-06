@@ -11,7 +11,7 @@
 	<!-- Project metadata -->
 	<packaging>pom</packaging>
 	<artifactId>solor-snomed</artifactId>
-	<version>2015.02.16-SNAPSHOT</version>
+	<version>2015.03.06</version>
 	<description>A SOLOR database, including sct-econcept-2015.01.31-build-5-active-only</description>
 	
 	<name>ISAAC DB Assembly</name>
