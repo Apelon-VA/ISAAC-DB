@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>gov.va.isaac.db</groupId>
 		<artifactId>isaac-db-parent</artifactId>
-		<version>Sprint_19-SNAPSHOT</version>
+		<version>Sprint_20-SNAPSHOT</version>
 	</parent>
 
 	<!-- Project metadata -->
 	<packaging>pom</packaging>
 	<artifactId>solor-snomed</artifactId>
-	<version>2015.03.06</version>
+	<version>SNAPSHOT</version>
 	<description>A SOLOR database, including sct-econcept-2015.01.31-build-5-active-only</description>
 	
 	<name>ISAAC DB Assembly</name>
